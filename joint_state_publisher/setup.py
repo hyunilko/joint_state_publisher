@@ -1,3 +1,4 @@
+import glob
 from setuptools import find_packages
 from setuptools import setup
 
@@ -6,11 +7,13 @@ package_name = 'joint_state_publisher'
 setup(
     name=package_name,
     version='2.4.0',
-    packages=find_packages(exclude=['test']),
+    packages=find_packages(),
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        # Install all test files into the correct share directory
+        ('share/' + package_name + '/test', glob.glob('test/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
